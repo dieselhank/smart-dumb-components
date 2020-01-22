@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import './App.css';
+import NoteListPage from './smartOnlyComponent/NoteListPage';
+import NotesPage from './smartDumbComponent/NotesPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <nav>
+            <ul>
+              <li><Link className="App-link" to="/">Home</Link></li>
+              <li><Link className="App-link" to="/smart">Note list with only Smart Component</Link></li>
+              <li><Link className="App-link" to="/dumb">Note list with Smart and Dumb Component</Link></li>
+            </ul>
+          </nav>
+          <Switch>
+          <Route path="/smart"><NoteListPage/></Route>
+          <Route path="/dumb"><NotesPage/></Route>
+          <Route path="/">
+            <h1>Select one of the links above</h1>
+          </Route>
+        </Switch>
+        </header>
+      </div>
+    </Router>
   );
 }
 
